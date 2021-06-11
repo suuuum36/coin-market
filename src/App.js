@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import {Button, ButtonGroup, TextField} from '@material-ui/core';
 import {useEffect, useState} from 'react';
-import { loadMarket, loadMarkets, loadOrder} from './Api';
+import { loadMarket, loadMarkets, loadOrder, order} from './Api';
 import LoginForm from "./LoginForm";
 import OrderForm from "./OrderForm";
 import Assets from "./Assets";
@@ -12,7 +12,7 @@ function App() {
     const [user, setUser] = useState(null);
     const [markets, setMarkets] = useState([]);
     const [market, setMarket] = useState(null);
-    const [orders, setOrder] = useState(null);
+    const [orders, setOrder] = useState([]);
 
     let defaultMarket = 'snu-won';
     const SnuWon = 'snu-won';
@@ -38,9 +38,10 @@ function App() {
 
     useEffect(() => {
         loadOrder()
-            .then(_orders => {
-                setOrder(_orders)
+            .then(orderObjects => {
+                setOrder(Object.keys(orderObjects).map(key => orderObjects[key]));
             })
+            console.log(orders);
     }, []);
 
 
@@ -88,13 +89,21 @@ function App() {
     let MakeOrder;
     let LoadOrder;
 
+
     if(user != null) {
-        console.log(user)
         Welcome = <span> Welcome! {user.name} </span>
         AccountShow = <Button onClick={logout}>로그아웃</Button>
         AssetsShow = <Assets/>
         MakeOrder = <OrderForm marketName={market.market.name}/>
-        LoadOrder = <span>{orders}</span>
+        LoadOrder = <div> {orders.map(order=> 
+                            <div className="load-orders">
+                                <div>체결상태 : {order.status}</div>
+                                <div>시장: {order.market.name}</div>
+                                <div>체결액 : {order.price}</div>
+                                <div>체결량: {order.quantity}</div>
+                            </div>
+                            )}
+                    </div>
 
         } else {
             Welcome = ''
@@ -104,9 +113,8 @@ function App() {
         }
 
     return (
-    <div>
+    <body>
         <header>
-
         <div><h2>logo</h2></div>
         <h2>Snu-Coin</h2>
         <div className="login-panel">
@@ -115,6 +123,7 @@ function App() {
             {AccountShow}
             {AssetsShow}
             {MakeOrder}
+            {LoadOrder}
 
         </div>
         </header>
@@ -166,7 +175,7 @@ function App() {
 
         </div>
 
-    </div>
+    </body>
     );
 
     }
