@@ -5,6 +5,7 @@ import {useEffect, useState} from 'react';
 import { loadMarket, loadMarkets, loadOrder, order} from './Api';
 import LoginForm from "./LoginForm";
 import OrderForm from "./OrderForm";
+import LoadOrder from "./LoadOrder";
 import Assets from "./Assets";
 import { render } from '@testing-library/react';
 
@@ -12,7 +13,7 @@ function App() {
     const [user, setUser] = useState(null);
     const [markets, setMarkets] = useState([]);
     const [market, setMarket] = useState(null);
-    const [orders, setOrder] = useState([]);
+
 
     let defaultMarket = 'snu-won';
     const SnuWon = 'snu-won';
@@ -34,14 +35,6 @@ function App() {
             .then(_market => {
                 setMarket(_market);
             })
-    }, []);
-
-    useEffect(() => {
-        loadOrder()
-            .then(orderObjects => {
-                setOrder(Object.keys(orderObjects).map(key => orderObjects[key]));
-            })
-            console.log(orders);
     }, []);
 
 
@@ -87,7 +80,7 @@ function App() {
     let AccountShow;
     let AssetsShow;
     let MakeOrder;
-    let LoadOrder;
+    let MyOrder;
 
 
     if(user != null) {
@@ -95,15 +88,7 @@ function App() {
         AccountShow = <Button onClick={logout}>로그아웃</Button>
         AssetsShow = <Assets/>
         MakeOrder = <OrderForm marketName={market.market.name}/>
-        LoadOrder = <div> {orders.map(order=> 
-                            <div className="load-orders">
-                                <div>체결상태 : {order.status}</div>
-                                <div>시장: {order.market.name}</div>
-                                <div>체결액 : {order.price}</div>
-                                <div>체결량: {order.quantity}</div>
-                            </div>
-                            )}
-                    </div>
+        MyOrder = <LoadOrder/>
 
         } else {
             Welcome = ''
@@ -123,16 +108,13 @@ function App() {
             {AccountShow}
             {AssetsShow}
             {MakeOrder}
-            {LoadOrder}
+            {MyOrder}
 
         </div>
         </header>
         <div id="contents">
             <div className="market">
                 <ButtonGroup color="primary" aria-label="outlined primary button group">
-                    {/* {markets.map(market =>
-                        <Button>{market.name}</Button>
-                    )} */}
                     <Button onClick = {ShowOrderBook1}>SNU-WON</Button>
                     <Button onClick = {ShowOrderBook2}>UNS-WON</Button>
                     <Button onClick = {ShowOrderBook3}>SNU-UNS</Button>

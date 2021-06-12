@@ -28,6 +28,17 @@ const get = async (url, query={}, extraHeaders={}) => {
     return await res.json();
 }
 
+
+const remove = async (url, query={}, extraHeaders={}) => {
+    const res = await fetch(`${defaultUrl}/${url}`, {
+        method: 'DELETE',
+        headers: {...getDefaultHeaders(), ...extraHeaders}
+    });
+    return await res.json();
+}
+
+
+
 const login = async (name, password) => {
     return await post('login', {name, password});
 }
@@ -53,7 +64,7 @@ const loadOrder =  async() => {
 }
 
 const deleteOrder = async(order_id) => {
-    return await post('orders', {order_id})
+    return await remove(`orders/${order_id}`)
 }
 
 export {
