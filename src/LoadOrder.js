@@ -14,14 +14,32 @@ const LoadOrder = () => {
                 })
     }, [])
 
+    const DeleteOrder = async (e) => {
+        console.log(e);
+        if(window.confirm("주문을 취소하시겠습니까?")) {
+            const res = await deleteOrder(e);
+        }
+    }
+
+    let statusText;
+    const showStatus = (status) => {
+        if(status ==1) {
+            statusText = '체결완료'
+        } else if(status ==0) {
+            statusText = '미체결'
+        } else if (status==-1) {
+            statusText = '주문취소'
+        }
+    }
+
     return (
         <div> {orders.map(order=> 
             <div className="load-orders">
-                <div>체결상태 : {order.status == 1 ? '체결완료' : '미체결'}</div>
+                <div showStatus = {showStatus(order.status)} >체결상태 : {statusText} </div>
                 <div>시장: {order.market.name}</div>
                 <div>체결액 : {order.price}</div>
                 <div>체결량: {order.quantity}</div>
-                {order.status == 1 ?  '' : <Button>주문취소</Button>}
+                {order.status == 0 ? <button className={order._id} onClick={e=> DeleteOrder(e.target.className)}>주문취소</button> : ''}
             </div>
             )}
         </div>
