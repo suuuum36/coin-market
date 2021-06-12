@@ -1,3 +1,110 @@
+h2 {
+    margin-right: 5px;
+}
+
+.whole {
+    display: flex;
+    margin: auto;
+    width: fit-content;
+    margin-top: 40px;
+}
+
+.left {
+    margin-right: 100px;
+}
+
 .load-orders {
     display: flex;
+}
+
+.title{
+    background-color: #3f51b5;
+    margin-bottom: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.inner-title {
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+
+.orderBookButton {
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+
+.marketName {
+    color: #3f51b5;;
+    font-size: 23px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.profileDiv {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.user {
+    color: #3f51b5;
+    font-weight: 500;
+    margin-right: 3px;
+}
+
+span{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: fit-content;
+}
+
+.my-asset {
+    background-color: #3f51b5;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.orderDiv {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.buy-sell {
+    display: flex;
+    width: 100%;
+}
+
+.buy-sell-button {
+    width: 50%;
+}
+
+.side {
+    color: #3f51b5;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 7px;
+    margin-left: 7px;
+    margin-bottom: 7px;
+}
+
+.selectMarket {
+    margin-bottom: 10px;
+}
+
+.my-order {
+    color: #3f51b5;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-bottom: #3f51b5 1px solid;
+    padding-bottom: 8px;
 }

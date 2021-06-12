@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import { order } from './Api';
 import {Button, TextField} from "@material-ui/core";
+import './App.css';
 
 
 const OrderForm = (props) => {
@@ -16,10 +17,23 @@ const OrderForm = (props) => {
         }
     }
 
+    let sideText; 
+    if(side=='buy') {
+        sideText = '매수'
+    } else if (side=='sell') {
+        sideText = '매도'
+    } else {
+        sideText = ''
+    }
+
     return (
-        <div>
+        <div className="orderDiv">
             <form className="create-order" onSubmit={onOrder}>
-                <Button onClick={e=> setSide('buy')}>Buy</Button><Button onClick={e=> setSide('sell')}>Sell</Button>
+                <div className="buy-sell">
+                    <Button className="buy-sell-button" onClick={e=> setSide('buy')}>Buy</Button>
+                    <Button className="buy-sell-button"onClick={e=> setSide('sell')}>Sell</Button>
+                </div>
+                <div className="side">{sideText}</div>
                 <TextField size="small" id="filled-basic" label="price" variant="filled" type="number" onChange={e=> setPrice(e.target.value)}/>
                 <TextField size="small" id="filled-basic" label="quantity" variant="filled" type="number" onChange={e=> setQuantity(e.target.value)}/>
                 <Button type="submit" variant="contained" color="primary">Order</Button>

@@ -1,6 +1,14 @@
-import {Button, Radio, TextField} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import {useEffect, useState} from 'react';
 import { loadOrder, deleteOrder} from './Api';
+import './App.css';
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 //delete 수정중
 
@@ -65,15 +73,17 @@ const showObject = filterObject.map((order) => {
 console.log(orderList);
 
     return (
-        <>
-            <div>
-                <input type="radio" value="snu-won uns-won snu-uns" onClick={e=> MarketChange(e.target.value)} name = "market" defaultChecked/> 모두보기
+        <div>
+            <div className="my-order"> 내 주문 확인하기 </div>
+            <div className="selectMarket">
+                <input type = "radio" value="snu-won uns-won snu-uns" onClick={e=> MarketChange(e.target.value)} name = "market" defaultChecked/> 모두보기
                 <input type="radio" value="snu-won" onClick={e=> MarketChange(e.target.value)} name = "market"/> SNU-WON
                 <input type="radio" value="uns-won" onClick={e=> MarketChange(e.target.value)} name = "market"/> UNS-WON
                 <input type="radio" value="snu-uns" onClick={e=> MarketChange(e.target.value)} name = "market"/> SNU-UNS
             </div>
+
             {orderList}
-        </>
+        </div>
     )
     
 }

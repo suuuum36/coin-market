@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import { loadAssets } from './Api';
+import './App.css';
 
 const Assets = () => {
     const [assets, setAssets] = useState([]);
@@ -13,7 +14,7 @@ const Assets = () => {
 
     return (
         <div>
-            <h3>assets</h3>
+            <div className="my-asset">내 자산 확인하기</div>
             {
                 assets.map(asset => {
                     return (<div>
