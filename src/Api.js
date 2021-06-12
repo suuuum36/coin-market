@@ -44,9 +44,24 @@ const loadMarket = async(market) => {
     return await get(`markets/${market}`);
 }
 
+const order = async(price, quantity, market, side) => {
+    return await post('orders', {price, quantity, market, side})
+}
+
+const loadOrder =  async() => {
+    return await get('orders');
+}
+
+const deleteOrder = async(order_id) => {
+    return await post('orders', {order_id})
+}
+
 export {
     login,
     loadMarket,
     loadMarkets,
     loadAssets,
+    order,
+    loadOrder,
+    deleteOrder
 }

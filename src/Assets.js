@@ -7,9 +7,10 @@ const Assets = () => {
     useEffect(() => {
         loadAssets()
         .then(_assets => {
-            setAssets(_assets);
+            setAssets(_assets)
         })
     }, []);
+
     return (
         <div>
             <h3>assets</h3>
